@@ -1,0 +1,290 @@
+/* Creating fonts */
+
+@font-face {
+    font-family: 'Cloister Black';
+    src: URL('../CloisterBlack.ttf') format('truetype');
+}
+
+/* Meta data */
+
+html {
+    background-color: beige;
+}
+
+body {
+    background-color: beige;
+    padding: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Navigation bar */
+
+.navigation_bar {
+        border-bottom: 5px solid black;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        display: grid;
+        grid-template-columns: 2fr 7fr 2fr;
+        text-align: center;
+        align-items: center;
+    }
+
+    .left_nav p {
+        font-family: 'Cloister Black';
+        margin: 0px;
+        font-size: 1.1em;
+        color: black;
+        text-align: left;
+    }
+
+    .center_nav a {
+        font-family: 'Cloister Black';
+        text-decoration: none;
+        color: black;
+        font-size: 6em;
+    }
+
+    .right_nav h6 {
+        font-family: 'Cloister Black';
+        margin: 0px;
+        font-size: 1.1em;
+        text-align: right;
+        align-items: right;
+    }
+
+/* Sections tab */
+
+.sections_tab {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 5px solid black;
+    }
+
+    .sections_tab a {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        margin-right: 25px;
+        text-decoration: none;
+        font-size: 1.1em;
+        color: black;
+        font-weight: bold;
+        border-bottom: 2px transparent darkred;
+        transition: border-bottom 0.5s;
+        transition: color 0.5s;
+    }
+
+    .sections_tab a:hover {
+        border-bottom: 3px solid darkred;
+        color: darkred;
+        transition: border-bottom 0.5s;
+        transition: color 0.5s;
+    }
+
+
+/* fuck this stupid shit */
+.wrapper {
+    display: grid;
+    grid-template-areas: 
+    "headline"
+    "main_content"
+    ;
+}
+
+
+/* Headling image */
+.headline {
+        grid-area: headline;
+        display: grid;
+        grid-template-columns: 4fr 6fr;
+        grid-gap: 0.75em;
+        padding-top: 10px;
+    }
+
+    .headline_image {
+        padding: 10px;
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    .headline_story {
+        grid-column: 2/3;
+        grid-row: 1/2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px;
+        grid-gap: 0.75em;
+        text-align: center;
+        align-items: baseline;
+        }
+
+        .headline_story h2 {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: bolder;
+            text-align: justify;
+            padding-left: 10px;
+            border-right: 3px solid black;
+            border-bottom: 3px solid black;
+        }
+
+        .headline_story p {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            text-align: left;
+            margin: 0px;
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+
+        .headline_story .story1 {
+            grid-column: 1/2;
+            grid-row: 1/2;
+        }
+
+        .headline_story .story2 {
+            grid-column: 1/2;
+            grid-row: 2/3;
+        }
+
+        .headline_story .story3 {
+            grid-column: 2/3;
+            grid-row: 1/2;
+        }
+
+        .headline_story .story4 {
+            grid-column: 2/3;
+            grid-row: 2/3;
+        }
+
+
+
+
+/* Main Content */
+.main_content {
+    grid-area: main_content;
+    grid-gap: 30px;
+    display: grid;
+    grid-template-columns: 3fr 13fr;
+    grid-template-areas: 
+    "standings_tables main_body"
+    ;
+    }
+
+    .standings_tables {
+        grid-area: standings_tables;
+        display: grid;
+        grid-gap: 0px;
+        padding-left: 10px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+        .prem_leg h3 {
+                font-size: 1.4em;
+                border-top: 3px solid black;
+                border-bottom: 3px solid black;
+            }
+
+            .prem_leg_grid {
+                display: grid;
+                grid-template-rows: repeat(6, auto);
+                grid-template-columns: 50px repeat(5, 40px);
+                text-align: left;
+            }
+
+            .prem_leg_grid i {
+                font-size: 0.01em;
+            }
+
+            .prem_leg_col1 {
+                font-weight: bold;
+                background-color: beige;
+            }
+            
+            .prem_leg_col2, .prem_leg_col3, .prem_leg_col4, .prem_leg_col5, .prem_leg_col6 {
+                text-align: right;
+            }
+
+        .mlb h3 {
+                font-size: 1.4em;
+                border-top: 3px solid black;
+                border-bottom: 3px solid black;
+            }
+            
+            .mlb_grid {
+                display: grid;
+                grid-template-rows: repeat(6, auto);
+                grid-template-columns: 50px repeat(5, 40px);
+                text-align: left;
+            }
+
+            .mlb_grid i {
+                font-size: 0.01em;
+            }
+
+            .mlb_col1 {
+                font-weight: bold;
+                background-color: beige;
+            }
+            
+            .mlb_col2, .mlb_col3, .mlb_col4, .mlb_col5, .mlb_col6 {
+                text-align: right;
+            }
+
+        .b1g h3 {
+                font-size: 1.4em;
+                border-top: 3px solid black;
+                border-bottom: 3px solid black;
+            }
+            
+            .b1g_grid {
+                display: grid;
+                grid-template-rows: repeat(6, auto);
+                grid-template-columns: 50px repeat(5, 40px);
+                text-align: left;
+            }
+
+            .b1g_grid i {
+                font-size: 0.01em;
+            }
+
+            .b1g_col1 {
+                font-weight: bold;
+                background-color: beige;
+            }
+            
+            .b1g_col2, .b1g_col3, .b1g_col4, .b1g_col5, .b1g_col6 {
+                text-align: right;
+            }
+
+    .main_body {
+            grid-area: main_body;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-areas: 
+            'main_center_story main_right_story main_left_story'
+            ;
+            grid-gap: 1em;
+        }
+
+        .main_left_story {
+            grid-area: main_left_story;
+        }
+
+        .main_center_story {
+            grid-area: main_center_story;
+        }
+
+        .main_right_story {
+            grid-area: main_right_story;
+        }
+
+        .main_body h1 {
+            text-align: center;
+            padding-top: 5px;
+            border-top: 3px solid black;
+            text-transform: uppercase;
+        }
+
+        .main_body h4 {
+            text-align: center;
+            padding-bottom: 5px;
+            border-bottom: 3px solid black;
+        }
