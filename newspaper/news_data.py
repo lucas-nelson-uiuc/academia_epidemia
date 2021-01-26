@@ -1,4 +1,4 @@
-#Import necessary libraries
+#Import necessary libraries 
 import webbrowser, requests, time, bs4
 
 #Reddit information
