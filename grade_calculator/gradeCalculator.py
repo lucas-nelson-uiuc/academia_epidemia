@@ -11,12 +11,12 @@ class Student:
 
 		for course in self.course_schedule:
 			course_points = 0
-			course_categories = input("Enter grading categories for {0} 'x,y,z': \n".format(course))
+			course_categories = input("Enter grading categories for {0}'x,y,z': \n".format(course))
 			c_c_list = course_categories.split(",")
 			for category in c_c_list:
-				category_weight = float(input("Enter category weight for {0} 'float': \n".format(category)))
+				category_weight = float(input("Enter category weight for {0}'float': \n".format(category)))
 				category_total = float(input("How many points possible for {0}'float': \n".format(category)))
-				category_achieved = float(input("How many points achieved for {0} 'float': \n".format(category)))
+				category_achieved = float(input("How many points achieved for {0}'float': \n".format(category)))
 				course_points += (category_achieved / category_total) * (category_weight / 100)
 			course_total[course] = round(course_points, 4) * 100
 
@@ -84,5 +84,16 @@ class Student:
 			print("{:<10} {:<15} {:<5} {:<5}".format(*course))
 
 
-Lucas = Student('Lucas', ['MATH 213', 'ECON 437', 'ECON 440', 'STAT 385', 'STAT 410', 'STAT 425'])
-Lucas.course_calc()
+
+Lucas_fa18 = Student('Lucas_fa18', ['ECON 103', 'MATH 221', 'ASTR 122', 'FR 103', 'LAS 101'])
+Lucas_fa18.course_calc()
+Lucas_sp19 = Student('Lucas_sp19', ['ECON 198', 'MATH 231', 'FR 104', 'STAT 200', 'NPRE 101'])
+Lucas_sp19.course_calc()
+Lucas_fa19 = Student('Lucas_fa19', ['ECON 203', 'ECON 302', 'MATH 415', 'CS 105', 'ECON 199', 'KIN 104'])
+Lucas_fa19.course_calc()
+Lucas_sp20 = Student('Lucas_sp20', ['ECON 303', 'ECON 402', 'STAT 400', 'HIST 142', 'SOC 160'])
+Lucas_sp20.course_calc()
+Lucas_fa20 = Student('Lucas_fa20', ['MATH 213', 'ECON 437', 'ECON 440', 'STAT 385', 'STAT 410', 'STAT 425'])
+Lucas_fa20.course_calc()
+Lucas_sp21 = Student('Lucas_sp21', ['ECON 474', 'ECON 490', 'STAT 426', 'STAT 430', 'MATH 347', 'CS 199'])
+Lucas_sp21.course_calc()
