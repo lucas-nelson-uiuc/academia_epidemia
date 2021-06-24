@@ -33,10 +33,11 @@ def blackjack2(name, games_won, games_lost, iterations):
 			going over 21.
 			""")
 
+		# we don't care if you know the rules or not
 		buffer1 = input("Do you understand the rules?\n> ")
-		buffer2 = input("Good for you. Press ENTER to play!\n> [INSERT TOKEN]")
+		buffer2 = input("Press ENTER to play!\n> [INSERT TOKEN]")
 	else:
-		buffer2 = input("Good for you. Press ENTER to play!\n> [INSERT TOKEN]")
+		buffer2 = input("Press ENTER to play!\n> [INSERT TOKEN]")
 	
 	### GAME ARCHITECTURE ###
 	deck = {'two':2, 'three':3, 'four':4, 'five':5, 'six':6, 'seven':7, 'eight':8, 'nine':9, 'ten':10, 'jack':10, 'queen':10, 'king':10, 'ace':[1, 11]}
@@ -47,6 +48,8 @@ def blackjack2(name, games_won, games_lost, iterations):
 		hand_sum = 0
 		
 		while (hand_sum < 21):
+			
+			# deal random card using `deck` object above
 			dealt_card = random.choice(list(deck.keys()))
 
 			# account for special case: aces
@@ -66,7 +69,7 @@ def blackjack2(name, games_won, games_lost, iterations):
 				hand_sum += deck[dealt_card]
 				print("Current sum: " + str(hand_sum))
 			
-			# if hand_sum remains less than 21
+			# game condition one: undetermined
 			if (hand_sum < 21):
 				continue
 			
@@ -74,22 +77,22 @@ def blackjack2(name, games_won, games_lost, iterations):
 		# game condition two: success
 		if (hand_sum == 21):
 			games_won += 1
-			print(f"GAME OVER: You have won {games_won} and lost {games_lost} games of blackjack."); print(filler1 * 2)
+			print(f"GAME OVER: You have won {games_won} and lost {games_lost} games of blackjack2."); print(filler1 * 2)
 		
-		# game condition three: loss
+		# game condition three: defeat
 		if (hand_sum > 21):
 			games_lost += 1
-			print(f"GAME OVER: You have won {games_won} and lost {games_lost} games of blackjack."); print(filler1 * 2)
+			print(f"GAME OVER: You have won {games_won} and lost {games_lost} games of blackjack2."); print(filler1 * 2)
 
-		# DO NOT FORGET TO UPDATE game_count
+		# DO NOT FORGET TO UPDATE `game_count`
 		game_count += 1
 			
-	# prompt decision to start new game
+	# store current results in next game iteration
 	result = [name, games_won, games_lost]
 	endgame_decision(result)
 
 
-# prompt player to play new game; reached if hand_sum >= 21
+# prompt player to play new game; reached at end of n iterations
 def endgame_decision(result):
 	prompt = input('Would you like to start a new game? yes or no\n> ')
 	if prompt.lower() == 'yes':
