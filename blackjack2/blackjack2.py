@@ -96,7 +96,8 @@ def endgame_decision(result):
 		iterations = int(input('How many games would you like to play? Enter a number\n> '))
 		blackjack2(result[0], result[1], result[2], iterations)
 	if prompt.lower() == 'no':
-		print(filler2 * 2); print(f"{result[0]}, you won {result[1]} games and lost {result[2]} games. Better luck next time!"); print(filler2 * 2)
+		print(filler2 * 2); print("SCORE REPORT:"); print(filler1 * 2)
+		print(f"Wins      : {result[1]}"); print(f"Losses    : {result[2]}"); print("Percentage: {:.4}".format(result[1] / (result[1] + result[2]))); print(filler2 * 2)
 
 
 ### CALLING IN TERMINAL
