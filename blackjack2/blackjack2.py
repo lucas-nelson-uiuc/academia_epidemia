@@ -1,8 +1,11 @@
-### IMPORT LIBRARIES
+# Simulation of blackjack with terminal and graphing functionality.
+# Contains multiple points of user input and file writing, but is
+# kept within a controlled environment for no user interference.
+
 import profile
 import random
+import bj_analysis
 
-### CREATE PLAYER
 class Player:
 
 	def __init__(self):
@@ -10,17 +13,22 @@ class Player:
 		self.games_won  = 0
 		self.games_lost = 0
 
-# variables for pretty printing
 filler1 = "------------------------"
 filler2 = "========================"
 
-def blackjack2(name, games_won, games_lost, iterations):
-	### Welcome to blackjack2! This python script will allow you to create a user instance of your own blackjack game
-	### and keep track of games won and (more likely) games lost.
+def simulation(name, games_won, games_lost, iterations=1, cycles=0):
+	"""Simulates blackjack game a specified number of iterations.
 
-	### USER SECTION ###
+    If cycles positive, multiple blackjack simulations of specificed
+    iteration length will be played and tracked per cycle (all of
+    equal length).
+
+    Results stored in separate .csv files for analysis and
+    graph plotting (terminal only).
+	"""
+
 	if (games_won == 0) & (games_lost == 0):
-		print(filler2 * 2); print(f"Welcome to blackjack2, {name}!"); print(filler1 * 2)
+		print(filler2 * 2); print(f"Welcome to blackjack2, {name.title()}!"); print(filler1 * 2)
 		print("RULES:"); print(filler1 * 2)
 		print("""
 			Objective: Beat the dealer by getting as close to 21 as possible without going over 21
@@ -33,26 +41,21 @@ def blackjack2(name, games_won, games_lost, iterations):
 			going over 21.
 			""")
 
-		# we don't care if you know the rules or not
-		buffer1 = input("Do you understand the rules?\n> ")
-		buffer2 = input("Press ENTER to play!\n> [INSERT TOKEN]")
-	else:
 		buffer2 = input("Press ENTER to play!\n> [INSERT TOKEN]")
 	
-	### GAME ARCHITECTURE ###
-	deck = {'two':2, 'three':3, 'four':4, 'five':5, 'six':6, 'seven':7, 'eight':8, 'nine':9, 'ten':10, 'jack':10, 'queen':10, 'king':10, 'ace':[1, 11]}
+	cycle = 0
 	game_count = 0
+	deck = {'two':2, 'three':3, 'four':4, 'five':5, 'six':6, 'seven':7, 'eight':8, 'nine':9, 'ten':10, 'jack':10, 'queen':10, 'king':10, 'ace':[1, 11]}
 
+	
 	while (game_count < iterations):
 		print(filler2 * 2); print("GAME COUNT: {}".format(game_count + 1)); print(filler1 * 2)
 		hand_sum = 0
 		
 		while (hand_sum < 21):
 			
-			# deal random card using `deck` object above
 			dealt_card = random.choice(list(deck.keys()))
 
-			# account for special case: aces
 			if (dealt_card == "ace"):
 				if hand_sum + 11 > 21:
 					print("Dealt card : " + str(dealt_card))
@@ -63,7 +66,6 @@ def blackjack2(name, games_won, games_lost, iterations):
 					hand_sum += deck[dealt_card][1]
 					print("Current sum: " + str(hand_sum))
 
-			# account for all other non-ace cases
 			if (dealt_card != 'ace'):
 				print("Dealt card : " + str(dealt_card))
 				hand_sum += deck[dealt_card]
@@ -86,25 +88,45 @@ def blackjack2(name, games_won, games_lost, iterations):
 
 		# DO NOT FORGET TO UPDATE `game_count`
 		game_count += 1
-			
+		with open('../blackjack/single_results.csv', 'a') as single_file:
+			game_percent = games_won / game_count
+			single_file.write(f'{game_count},{game_percent}\n')
+		
 	# store current results in next game iteration
 	result = [name, games_won, games_lost]
 	endgame_decision(result)
 
 
-# prompt player to play new game; reached at end of n iterations
 def endgame_decision(result):
+	"""Prompts user to continue playing.
+
+	If yes, game continues with past iterations results as input for
+	next round of blackjack.
+
+	If no, game ends. Results are written to separate file after which
+	the user observes game statistics and line graph of winning
+	percentage over time.
+	"""
+
 	prompt = input('Would you like to start a new game? yes or no\n> ')
+	
 	if prompt.lower() == 'yes':
 		iterations = int(input('How many games would you like to play? Enter a number\n> '))
-		blackjack2(result[0], result[1], result[2], iterations)
+		simulation(result[0], result[1], result[2], iterations)
+	
 	if prompt.lower() == 'no':
 		print(filler2 * 2); print("SCORE REPORT:"); print(filler1 * 2)
 		print(f"Wins      : {result[1]}"); print(f"Losses    : {result[2]}"); print("Percentage: {:.4}".format(result[1] / (result[1] + result[2]))); print(filler2 * 2)
+		with open('../blackjack/career_results.csv', 'a') as career_file:
+			games_played = result[1] + result[2]
+			win_percent = result[1] / games_played
+			career_file.write('{},{:.4}\n'.format(games_played, win_percent))
+			bj_analysis.convert_pd()
+		with open('../blackjack/single_results.csv', 'w') as single_file:
+			single_file.write('Game Count,Win Percentage\n')
 
 
-### CALLING IN TERMINAL
 if __name__ == '__main__':
 	player = Player()
 	iterations = int(input('How many games would you like to play? Enter a number\n> '))
-	profile.run('print(blackjack2(player.name, player.games_won, player.games_lost, iterations)); print()')
+	profile.run('simulation(player.name, player.games_won, player.games_lost, iterations)', 'restats.txt')
