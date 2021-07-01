@@ -9,6 +9,9 @@ A collection of projects that stem from my curiosity and are curtailed for my co
 Collection of Python, HTML, and CSS documents that scrape, compile, and present information from various websites onto one HTML document for my consumption. Using Python libraries like `webbrowser`, `BeautifulSoup`, and `requests`, I scraped up-to-date information related to local weather forecasts, global politics, various sports leagues and their standings, <i>The History Channel</i>'s fact of the day, and much more. This script will write said information onto a file specific to that information before being manipulated on one final Python script that stitches the information into one final HTML document. The result is a webpage (designed via HTML, styled via CSS) that consistently provides updated information on what matters to me without the hassle of navigating multiple web pages nor at the risk of coming across distractions.
 
 ### 2. blackjack2
+<i>Modified : 07/01/2021<br></i>
+Simulation update. Included `repetition.py` to allow multiple cycles of n-iteration blackjack games to occur, complete with pandas DataFrame functionality and in-terminal graphing functions (line graph for winning percentage in `blackjack2.py` and histogram for winning distribution in `repetition.py`).
+
 <i>Modified : 06/23/2021<br></i>
 Massive revamp. Inclusion of `Player` class, `endgame_decision` function, manageable user interface and code readibility, timed performance using the `profile` package, and option to player `n > 1` games in one function call. Fun fact: printing is responsible for 40% of the time `blackjack2()` takes to execute.
 
