@@ -13,7 +13,7 @@ class SpotifyUser():
 def get_playlist_df(spotify_user, url):
 
 	auth_manager = SpotifyClientCredentials(client_id = spotify_user.client_id,
-											client_secret = spotify_user.client_secret)
+						client_secret = spotify_user.client_secret)
 	sp = spotipy.Spotify(auth_manager=auth_manager)
 
 
@@ -30,7 +30,7 @@ def get_playlist_df(spotify_user, url):
 		track_popularity = item['track']['popularity']
 		track_number = item['track']['track_number']
 		track_details.append([track_album, track_artist, track_title, track_url, track_length,
-								track_explicit, track_popularity, track_number])
+					track_explicit, track_popularity, track_number])
 
 	# gather track features
 	features_labels = ['danceability', 'energy', 'loudness', 'speechiness', 'acousticness', 'instrumentalness',
