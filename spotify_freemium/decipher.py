@@ -55,8 +55,8 @@ def decipher_playlist(spotify_user, url_list):
 
 if __name__ == '__main__':
 	user = SpotifyUser()
-	user.client_id = '3369a177760443e1ba8fdc24ffe8ee3a'
-	user.client_secret = '26557253d83447879b0ff7251d291517'
+	user.client_id = # enter client_id
+	user.client_secret = # enter client_secret
 	decipher_playlist(user, '')
 
 
