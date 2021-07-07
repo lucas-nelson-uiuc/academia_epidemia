@@ -6,7 +6,8 @@ A collection of projects that stem from my curiosity and are curtailed for my co
 ## Featured Projects
 
 ### 1. spotify_freemium
-<i>In Progress</i><br>
+<i>Started: 07/03/2021</i><br>
+<i>IN PROGRESS</i><br>
 Purpose: provide up-to-date, on-demand data analytics of a Spotify user's (mainly me) usage.
 
 Procedure: using `spotipy` to access Spotify's API via user authentication tokens, I created a crawler that provides data per specified playlist. This data is gathered in a `pandas` DataFrame for further analysis.
