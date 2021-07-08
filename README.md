@@ -29,5 +29,10 @@ Massive revamp. Inclusion of `Player` class, `endgame_decision` function, manage
 Simple game of blackjack that follows basic principles. Prompts user to provide name and understanding of blackjack rules before gameplay. After gameplay starts, the user is dealt a card one-by-one until they either achieve a score of 21, a score greater than 21, or simply reject another card. Their final score is reported and the outcome of their game before being prompted to play again.
 
 ### 4. grade_calculator
+
+<i>Modified : 06/23/2021<br></i>
+Massive revamp. Greater inclusion of `Student()` class and implementation of more single purpose functions. Allows for a much smoother and easy-to-follow experience for the user in the terminal with a nicely plotted table detailing the student's performance in the requested semester.
+
+
 <i>Completed: 12/06/2019<br></i>
 Python script that returns my semester GPA. Completed by first inputting my list of classes per semester, categories (homework, midterms, projects, etc.) per class, and graded assignments per category. After computing a course's specific grade for all courses in a given semester, a stylized table is returned to display basic statistics about my performance.
