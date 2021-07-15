@@ -5,14 +5,13 @@ A collection of projects that stem from my curiosity and are curtailed for my co
 
 ## Featured Projects
 
-### 1. spotify_freemium
-<i>Started: 07/03/2021</i><br>
+### 1. spotify_analysis
 <i>IN PROGRESS</i><br>
-Purpose: provide up-to-date, on-demand data analytics of a Spotify user's (mainly me) usage.
+Purpose: ...
 
-Procedure: using `spotipy` to access Spotify's API via user authentication tokens, I created a crawler that provides data per specified playlist. This data is gathered in a `pandas` DataFrame for further analysis.
+Procedure: ...
 
-Plans: correlation score (collect genre-specific playlists and measure correlation of audio features/analytics), comparison metrics (how much does one playlist correlate to a genre-representative playlist), flask application (user interface functionality; flask for familiarity but not limited to), and documentation (possibly packaging project).
+Plans: ...
 
 ### 2. newsPaper
 <i>Completed: 01/05/2021<br></i>
