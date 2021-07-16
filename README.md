@@ -5,7 +5,7 @@ A collection of projects that stem from my curiosity and are curtailed for my co
 
 ## Featured Projects
 
-### 1. spotify_analysis
+### 1. spotipy_analysis
 <i>IN PROGRESS</i><br>
 Purpose: ...
 
