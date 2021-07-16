@@ -7,11 +7,6 @@ A collection of projects that stem from my curiosity and are curtailed for my co
 
 ### 1. spotipy_analysis
 <i>IN PROGRESS</i><br>
-Purpose: ...
-
-Procedure: ...
-
-Plans: ...
 
 ### 2. newsPaper
 <i>Completed: 01/05/2021<br></i>
