@@ -10,6 +10,6 @@ Includes self-testing features to ensure accuracy, and in the case an inaccuracy
 ### Project Details
 Author: Lucas Nelson
 
-Completed: 12/xx/2019
+Completed: 12/19/2019
 
-Updated: 06/xx/2021
+Updated: 06/07/2021
