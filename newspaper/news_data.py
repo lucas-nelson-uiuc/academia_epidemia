@@ -1,69 +1,6 @@
-#Import necessary libraries 
+#Import necessary libraries
 import webbrowser, requests, time, bs4
 
-#Reddit information
-with open('../raw/reddit.html', 'w') as reddit_brief:
-
-    #Gather Reddit link
-    reddit_URL = 'https://old.reddit.com/r/UIUC/new/'
-    headers = {'User-Agent': 'Google Chrome'}
-
-    #Gather HTML for specified Reddit page
-    reddit_request = requests.get(reddit_URL, headers=headers)
-    reddit_bs4 = bs4.BeautifulSoup(reddit_request.content, 'html.parser')
-
-    #Parse by specific class and write to specified file
-    reddit_title_div = reddit_bs4.select('p .title')
-    for title in reddit_title_div:
-        post_title = str(title)
-        start_index = post_title.find(">")
-        end_index = post_title.find("</a>")
-        post_title = post_title[start_index + 1 : end_index]
-        reddit_brief.write("==" + post_title + "--" + "\n")
-
-#Phillies information
-with open('../raw/phillies.html', 'w') as phillies_brief:
-    
-    phillies_URL = 'https://www.mlb.com/phillies'
-    
-    phillies_request = requests.get(phillies_URL)
-    phillies_bs4 = bs4.BeautifulSoup(phillies_request.content, 'html.parser')
-
-    phillies_title_list = []
-    phillies_title_div = phillies_bs4.select('li .p-headline-stack__link')
-    for title in phillies_title_div:
-        post_title = str(title)
-        start_index = post_title.find(">")
-        end_index = post_title.find("</a>")
-        post_title = post_title[start_index + 1 : end_index]
-        phillies_title_list.append(post_title)
-
-    i = 0
-    while i < (len(phillies_title_list) / 2):
-        phillies_brief.write("==" + phillies_title_list[i] + "--" + "\n")
-        i += 1
-
-#Redsox information
-with open('../raw/redsox.html', 'w') as redsox_brief:
-
-    redsox_URL = 'https://www.mlb.com/redsox'
-    
-    redsox_request = requests.get(redsox_URL)
-    redsox_bs4 = bs4.BeautifulSoup(redsox_request.content, 'html.parser')
-
-    redsox_title_list = []
-    redsox_title_div = redsox_bs4.select('li .p-headline-stack__link')
-    for title in redsox_title_div:
-        post_title = str(title)
-        start_index = post_title.find(">")
-        end_index = post_title.find("</a>")
-        post_title = post_title[start_index + 1 : end_index]
-        redsox_title_list.append(post_title)
-
-    i = 0
-    while i < (len(redsox_title_list) / 2):
-        redsox_brief.write("==" + redsox_title_list[i] + '--' + "\n")
-        i += 1
 
 #Weather information
 with open('../raw/weather.html', 'w') as weather_brief:
@@ -72,42 +9,38 @@ with open('../raw/weather.html', 'w') as weather_brief:
 
     weather_request = requests.get(weather_URL)
     weather_bs4 = bs4.BeautifulSoup(weather_request.content, 'html.parser')
+    
+    feels_like_div = weather_bs4.select('div .WeatherDetailsListItem--wxData--2s6HT')[0]
+    sunrise_div = weather_bs4.select('div .SunriseSunset--sunriseDateItem--3qqf7')[0]
+    sunset_div = weather_bs4.select('div .SunriseSunset--sunriseDateItem--3qqf7')[1]
+    moonphase_div = weather_bs4.select('div .WeatherDetailsListItem--wxData--2s6HT')[7]
 
-    feels_like_div = weather_bs4.select('div .CurrentConditions--tempValue--3KcTQ')
-    if True:
+    if feels_like_div:
         feels_title = str(feels_like_div)
-        start = feels_title.find(">")
         end = feels_title.find("</span>")
-        feels_like = feels_title[start + 1 : end]
+        feels_like = feels_title[end - 3 : end]
         weather_brief.write('Feels like: ' + "==" + feels_like + '--' + '\n')
 
-    sunrise_div = weather_bs4.select('div .SunriseSunset--dateValue--2nwgx')
-    if True:
+    if sunrise_div:
         sunrise_title = str(sunrise_div)
-        sunrise_start = sunrise_title.find(">")
         sunrise_end = sunrise_title.find("</p>")
-        sunrise = sunrise_title[sunrise_start + 1 : sunrise_end]
+        sunrise = sunrise_title[sunrise_end - 7 : sunrise_end]
         weather_brief.write('Sunrise: ' + "==" + sunrise + '--' + '\n')
 
-    sunset_div = weather_bs4.select('div .SunriseSunset--dateValue--2nwgx')
-    if True:
+    if sunset_div:
         sunset_title = str(sunset_div)
-        separator = sunset_title.find(',')
-        sunset_title2 = sunset_title[separator:]
-        sunset_start = sunset_title2.find(">")
-        sunset_end = sunset_title2.find("</p>")
-        sunset = sunset_title2[sunset_start + 1 : sunset_end]
+        sunset_end = sunset_title.find("</p>")
+        sunset = sunset_title[sunset_end - 7 : sunset_end]
         weather_brief.write('Sunset: ' + "==" + sunset + '--' + '\n')
 
-    moonphase_div = weather_bs4.select('div .WeatherDetailsListItem--wxData--23DP5')[-1]
-    if True:
+    if moonphase_div:
         moonphase_title = str(moonphase_div)
         moonphase_start = moonphase_title.find(">")
         moonphase_end = moonphase_title.find("</div>")
         moonphase = moonphase_title[moonphase_start + 1 : moonphase_end]
         weather_brief.write('Moonphase: ' + "==" + moonphase + '--' + '\n')
 
-    precipitation_div = weather_bs4.select('div .CurrentConditions--precipValue--RBVJT')
+    precipitation_div = weather_bs4.select('div .CurrentConditions--precipValue--3nxCj')
     if precipitation_div != None:
         precipitation_title = str(precipitation_div)
         precipitation_start = precipitation_title.find("<span>")
@@ -117,96 +50,6 @@ with open('../raw/weather.html', 'w') as weather_brief:
     else:
         precipitation = '100'
         weather_brief.write('Precipitation: ' + "==" + precipitation + '--' + '\n')
-
-#Cycling information
-with open('../raw/cycling.html', 'w') as cycling_brief:
-
-    #Cycling news
-    cycling_news_URL = 'https://www.cyclingnews.com/news/'
-    
-    cycling_news_request = requests.get(cycling_news_URL)
-    cycling_news_bs4 = bs4.BeautifulSoup(cycling_news_request.content, 'html.parser')
-
-    cycling_news_div = cycling_news_bs4.select('div .article-name')
-    cycling_brief.write('NEWS:\n')
-    for title in cycling_news_div:
-        post_title = str(title)
-        start_index = post_title.find(">")
-        end_index = post_title.find("</h3>")
-        post = post_title[start_index + 1 : end_index]
-        cycling_brief.write("==" + post + '--' + '\n')
-
-
-    #Cycling results
-    cycling_race_URL = 'https://www.cyclingnews.com/race-results/'
-
-    cycling_race_request = requests.get(cycling_race_URL)
-    cycling_race_bs4 = bs4.BeautifulSoup(cycling_race_request.content, 'html.parser')
-
-    cycling_race_div = cycling_race_bs4.select('div .article-name')
-    cycling_brief.write('RACES:\n')
-    for title in cycling_race_div:
-        post_title = str(title)
-        start_index = post_title.find(">")
-        end_index = post_title.find("</h3>")
-        post = post_title[start_index + 1 : end_index]
-        cycling_brief.write("==" + post + '--' + '\n')
-
-#Manchester City information
-with open('../raw/mancity.html', 'w') as mancity_brief:
-
-    mancity_URL = 'https://www.mancity.com/fixtures'
-    mancity_request = requests.get(mancity_URL)
-    mancity_bs4 = bs4.BeautifulSoup(mancity_request.content, 'html.parser')
-
-    mancity_date_div = mancity_bs4.select('div .fixture-header__competition-time')
-    mancity_time_div = mancity_bs4.select('div .fixture-body__when-time')
-    mancity_home_div = mancity_bs4.select('div .fixture-body__first-team-name')
-    mancity_away_div = mancity_bs4.select('div .fixture-body__second-team-name')
-
-    match_master_list = []
-
-    for i in range(0, len(mancity_date_div)):
-        if 'TBC' not in str(mancity_date_div[i]):
-
-            date = str(mancity_date_div[i])
-            date_start = date.find(">")
-            date_end = date.find("</time>")
-            match_date = date[date_start + len(">") : date_end]
-            match_date = match_date.lstrip()
-            match_date = match_date.rstrip()
-
-            time = str(mancity_time_div[i])
-            time_start = time.find(">")
-            time_end = time.find("</time>")
-            match_time = time[time_start + len(">") : time_end]
-            match_time = match_time.lstrip()
-            match_time = match_time.rstrip()
-
-            home = str(mancity_home_div[i])
-            home_start = home.find('<span class="shown-lg">')
-            home_end = home.find("</span>")
-            match_home = home[home_start + len('<span class="shown-lg">') : home_end]
-            match_home = match_home.lstrip()
-            match_home = match_home.rstrip()
-            
-            away = str(mancity_away_div[i])
-            away_start = away.find('<span class="shown-lg">')
-            away_end = away.find("</span>")
-            match_away = away[away_start + len('<span class="shown-lg">') : away_end]
-            match_away = match_away.lstrip()
-            match_away = match_away.rstrip()
-
-            match_details = [match_date, match_time, match_home, match_away]
-            match_master_list.append(match_details)
-
-
-    for match in match_master_list:
-        paste_string = ''
-        for detail in range(0, len(match) - 1):
-            paste_string += f'{match[detail]}---'
-        paste_string += f'{match[3]}' + '\n'
-        mancity_brief.write(paste_string)
 
 #ECNMST, MLB (news) information
 with open('../raw/nytimes.html', 'w') as nytimes_brief:
@@ -432,12 +275,12 @@ with open('../raw/pl_scorecard.html', 'w') as scorecard_brief:
             team[0] = 'BUR'
         if team[0] == 'Brighton and Hove Albion':
             team[0] = 'BHA'
-        if team[0] == 'Fulham':
-            team[0] = 'FFC'
-        if team[0] == 'West Bromwich Albion':
-            team[0] = 'WBA'
-        if team[0] == 'Sheffield United':
-            team[0] = 'SHU'
+        if team[0] == 'Watford':
+            team[0] = 'WAT'
+        if team[0] == 'Norwich City':
+            team[0] = 'NWC'
+        if team[0] == 'Brentford':
+            team[0] = 'BRE'
 
     final_list = []
     for team in team_list:
@@ -528,7 +371,7 @@ with open('../raw/ncaam_scorecard.html', 'w') as scorecard_brief:
         team_loss_start = team_loss_raw.find('>')
         team_loss = team_loss_raw[team_loss_start + 1 : ]
 
-        team_pct_raw = data_entries[6]
+        team_pct_raw = data_entries[3]
         team_pct_start = team_pct_raw.find('>')
         team_pct = team_pct_raw[team_pct_start + 1 : ]
 
@@ -552,7 +395,7 @@ with open('../raw/ncaam_scorecard.html', 'w') as scorecard_brief:
 #MLB standings
 with open('../raw/mlb_scorecard.html', 'w') as mlb_scorecard:
 
-    mlb_URL = 'https://www.baseball-reference.com/leagues/NL/2020-standings.shtml'
+    mlb_URL = 'https://www.baseball-reference.com/leagues/NL/2021-standings.shtml'
     mlb_request = requests.get(mlb_URL)
     mlb_bs4 = bs4.BeautifulSoup(mlb_request.content, 'html.parser')
 
@@ -786,7 +629,3 @@ with open('../raw/nasa.html', 'w') as nasa_brief:
     
     for elem in final_list:
         nasa_brief.write(elem + '\n')
-
-
-
-
