@@ -27,3 +27,7 @@ Massive revamp. Greater inclusion of `Student()` class and implementation of mor
 
 <i>Completed: 12/06/2019<br></i>
 Python script that returns my semester GPA. Completed by first inputting my list of classes per semester, categories (homework, midterms, projects, etc.) per class, and graded assignments per category. After computing a course's specific grade for all courses in a given semester, a stylized table is returned to display basic statistics about my performance.
+
+### 4. password_manager
+<i>Completed: 08/21/2021<br></i>
+`Tkinter` GUI that encrypts and decrypts passwords for a provided account(s). Interface is simple to use and information is kept secret in a stored text file.
