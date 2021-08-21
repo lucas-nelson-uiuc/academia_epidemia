@@ -117,7 +117,6 @@ icon_size.grid(row=0, column=0, sticky='nesw')
 
 Label(b, text='New Account').grid(row=1, column=0, sticky='e')
 Label(b, text='New Password').grid(row=2, column=0, sticky='e')
-Label(b, text='Confirm').grid(row=3, column=0, sticky='e')
 new_account = Entry(b)
 new_password = Entry(b)
 Button(b, text='Update', width=11, command=update_account
