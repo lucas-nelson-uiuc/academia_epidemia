@@ -6,6 +6,7 @@ import random
 
 
 root = Tk()
+root.title('')
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
@@ -13,8 +14,8 @@ account_details = {}
 with open('accounts.txt', 'r') as accounts_file:
     lines = accounts_file.readlines()
     for line in lines:
-        account, password, last_date = line.strip().split('..')
-        account_details[account] = (password, last_date)
+        account, username, password, last_date = line.strip().split('..')
+        account_details[account] = (username, password, last_date)
 
 
 account_details = {k: v for k, v in sorted(account_details.items(), key=lambda item: item[0].lower())}
@@ -26,8 +27,9 @@ statusmsg = StringVar()
 def update_account(*args):
     with open('accounts.txt', 'a+') as file:
         try:
-            file.write('{}..{}..{}'.format(
+            file.write('{}..{}..{}..{}'.format(
                 new_account.get(),
+                encrypt_password(new_username.get()),
                 encrypt_password(new_password.get()),
                 datetime.today().date())
                 + '\n')
@@ -51,7 +53,7 @@ def last_updated(*args):
     if len(idxs)==1:
         idx = int(idxs[0])
         name = list(account_details.keys())[idx]
-        date = account_details[name][1]
+        date = account_details[name][2]
         statusmsg.set("Last updated: {}".format(date))
     sentmsg.set('')
 
@@ -89,9 +91,11 @@ def show_password(*args):
     if len(idxs)==1:
         idx = int(idxs[0])
         lbox.see(idx)
-        real_pw = account_details.get(list(account_details.keys())[idx])[0]
+        real_un = account_details.get(list(account_details.keys())[idx])[0]
+        rael_un = decrypt_password((real_un))
+        real_pw = account_details.get(list(account_details.keys())[idx])[1]
         rael_pw = decrypt_password((real_pw))
-        sentmsg.set("Password: {}".format(rael_pw))
+        sentmsg.set("Username: {}\nPassword : {}".format(rael_un, rael_pw))
 
 a = Frame(root, padx=10, pady=10)
 a.grid(column=0, row=0, sticky='nesw')
@@ -116,20 +120,23 @@ icon_size.configure(image=icon)
 icon_size.grid(row=0, column=0, sticky='nesw')
 
 Label(b, text='New Account').grid(row=1, column=0, sticky='e')
-Label(b, text='New Password').grid(row=2, column=0, sticky='e')
+Label(b, text='Username').grid(row=2, column=0, sticky='e')
+Label(b, text='Password').grid(row=3, column=0, sticky='e')
 new_account = Entry(b)
+new_username = Entry(b)
 new_password = Entry(b)
 Button(b, text='Update', width=11, command=update_account
-            ).grid(row=3, column=1, sticky='w')
+            ).grid(row=4, column=1, sticky='w')
 Button(b, text='Delete', width=11, command=delete_account
-            ).grid(row=3, column=1, sticky='e')
+            ).grid(row=4, column=1, sticky='e')
 
 lbox = Listbox(c, listvariable=accounts, height=5)
 sentlbl = ttk.Label(c, textvariable=sentmsg)
 status = ttk.Label(c, textvariable=statusmsg)
 
 new_account.grid(row=1, column=1)
-new_password.grid(row=2, column=1)
+new_username.grid(row=2, column=1)
+new_password.grid(row=3, column=1)
 lbox.grid(column=0, row=100, rowspan=6, sticky='nesw')
 sentlbl.grid(column=0, row=107, sticky='ew')
 status.grid(column=0, row=106, sticky='ew')
