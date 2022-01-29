@@ -9,4 +9,5 @@ Welcome eBASS, the *electronic Budget Analysis Spreadsheet System*. (Really, I j
 ## Project Details
 
 **Completed:** January 13, 2022
+
 **Revised:** January 28, 2022
