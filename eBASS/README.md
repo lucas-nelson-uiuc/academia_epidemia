@@ -6,7 +6,7 @@ As the end of my time at university is slowly (but quickly) coming to an end, I'
 
 Welcome eBASS, the *electronic Budget Analysis Spreadsheet System*. (Really, I just liked the cBASS acronym for my cBASS project, so I've kept the nomenclature going.) Although this terminal application is only one half of the project I have in mind, this is where most of the traffic is coming in and out of my eBASS system.
 
-# Project Details
+## Project Details
 
 **Completed:** January 13, 2022
 **Revised:** January 28, 2022
