@@ -1,11 +1,11 @@
-import pandas as pd
-from dataeng import DataWarehouse, FileManagement, XLSXFile
+from DataWarehouse import DataWarehouse
+from XLSXFile import XLSXFile
 
 def main():
     d = DataWarehouse('csv')
     x = XLSXFile()
     x.write_to_excel(d.clean_dataframe(), 'test_workbook.xlsx')
-    x.confirm_chdir_xlsx(input('  ?? Open test_workbook.xlsx ?? (yes or no)\n\t> '), 'test_workbook.xlsx')
+    x.confirm_chdir_xlsx('test_workbook.xlsx')
 
 
 if __name__ == '__main__':
